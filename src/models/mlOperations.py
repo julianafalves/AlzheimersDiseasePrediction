@@ -6,14 +6,14 @@ from sklearn import metrics
 
 
 class genericModel:
-    def __init__(self,algorithm) -> None:
+    def __init__(self,algorithm,dataName) -> None:
         """
         Build ML model, using de parameters from mlParameters
         """       
         self.model = mlDispatcher.models[f"{algorithm}"]
         self.name = algorithm
-        print(type(self.model))
-
+        self.dataName = dataName
+        self.isMulticlass = True
 
     def train(self,x_train, y_train):
         """
@@ -29,6 +29,6 @@ class genericModel:
         """
         y_predict = self.model.predict(x_test)
         prob_predict = self.model.predict_proba(x_test)
-        Evaluate(y_test,y_predict,prob_predict)
+        Evaluate(y_test,y_predict,prob_predict,self.dataName,self.isMulticlass,self.name) #is this APROPRIATE in OOP?
 
         return y_predict
