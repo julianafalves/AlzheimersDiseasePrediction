@@ -34,16 +34,17 @@ renumCard = ['DATAFILE',
             'OPTION sol se',
             'OPTION Inbreeding',
             'OPTION cat 3',
-            'OPTION fixed_var mean']
+            'OPTION fixed_var mean', 
+            'OPTION excludeCHR 23 24 25 26']
 
 with open('renumCard.txt', 'w') as f:
     f.write('\n'.join(renumCard))
 
-#running the airemf90 to calculate the GEBVs
+#running the airemf90 lsto calculate the GEBVs
 os.system('ulimit -s unlimited')
 for runN in range(46):
     for ldValue in [80, 85, 90]:
-        filePath = f"run{runN}/LD/LD{ldValue}"
+        filePath = f"ADNI1filtered/run{runN}/LD/LD{ldValue}"
         os.system(f"filePath/renumf90 renumCard.txt")
 
         try:
